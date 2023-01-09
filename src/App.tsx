@@ -1,17 +1,22 @@
 import { useState, createContext } from "react";
 import Component2 from "./Component2";
-
-///////////////////////////////////////////////////////////////
-// Part A - String update
-const initialState: string = "John Doe"; // this also works
+//const initialState: string = "John Doe";
+const initialState: number[] = [1, 2];
 export const UserContext = createContext<typeof initialState>(initialState);
 export default function App() {
-  const [user1, setUser1] = useState(initialState);
-  return (
-    <UserContext.Provider value={user1}>
-      <h6>{`Hello ${user1}!`}</h6>
-      <Component2 />
-      <button onClick={() => setUser1("TLC")}>Change context</button>
-    </UserContext.Provider>
-  );
+const [arr, setArr] = useState(initialState);
+return (
+  <UserContext.Provider value={arr}>
+    <h6>{`Array: ${JSON.stringify(arr)}`}</h6>
+    <Component2 />
+    <button
+      onClick={() => {
+        setArr([...arr, arr.length + 1]);
+        console.log(arr);
+      }}
+    >
+      Add to array
+    </button>
+  </UserContext.Provider>
+);
 }
