@@ -15,12 +15,21 @@ export default function App() {
       ...obj,
       counter: obj.counter + addVal
     });
+  const [multVal, setMultVal] = useState(1);
+  const MultInput = () => {
+    let numArr1 = [...obj.arrNum];
+    numArr1.forEach((item, index, arr) => {
+      arr[index] = item * multVal;
+    });
+    setObj({ ...obj, arrNum: obj.arrNum = numArr1 });
+  };
+
   return (
     <UserContext.Provider value={obj}>
       <h6>Counter: {obj.counter}</h6>
       <h6>First: {obj.first}</h6>
       <h6>Last: {obj.last}</h6>
-      <h5>{`Array: ${JSON.stringify(obj.arrNum)}`}</h5>
+      <h6>{`Array: ${JSON.stringify(obj.arrNum)}`}</h6>
       <button
         onClick={() => {
           setObj({ ...obj, counter: obj.counter + 1 });
@@ -66,6 +75,12 @@ export default function App() {
       >
         Change Name
       </button>
+      <input
+        type="number"
+        value={multVal}
+        onChange={(e) => setMultVal(parseInt(e.target.value, 10))}
+      />
+      <button onClick={MultInput}>Mult Input</button>
       <Component2 />
     </UserContext.Provider>
   );
