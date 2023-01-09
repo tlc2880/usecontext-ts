@@ -8,6 +8,7 @@ function Component4() {
         <h6>Component 4</h6>
         <h6>First again: {user1.first}</h6>
         <h6>Last again: {user1.last}</h6>
+        <h6>Array again: {JSON.stringify(user1.arrNum)}</h6>
       </>
     );
 }
