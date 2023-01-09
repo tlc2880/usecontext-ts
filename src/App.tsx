@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, createContext } from "react";
+import Component2 from "./Component2";
 
-function App() {
+///////////////////////////////////////////////////////////////
+// Part A - String update
+const initialState: string = "John Doe"; // this also works
+export const UserContext = createContext<typeof initialState>(initialState);
+export default function App() {
+  const [user1, setUser1] = useState(initialState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={user1}>
+      <h6>{`Hello ${user1}!`}</h6>
+      <Component2 />
+      <button onClick={() => setUser1("TLC")}>Change context</button>
+    </UserContext.Provider>
   );
 }
-
-export default App;
