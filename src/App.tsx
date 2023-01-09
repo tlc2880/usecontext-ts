@@ -1,22 +1,21 @@
 import { useState, createContext } from "react";
 import Component2 from "./Component2";
 //const initialState: string = "John Doe";
-const initialState: number[] = [1, 2];
+const initialState = {
+  first: "John",
+  last: "Doe"
+};
 export const UserContext = createContext<typeof initialState>(initialState);
 export default function App() {
-const [arr, setArr] = useState(initialState);
-return (
-  <UserContext.Provider value={arr}>
-    <h6>{`Array: ${JSON.stringify(arr)}`}</h6>
-    <Component2 />
-    <button
-      onClick={() => {
-        setArr([...arr, arr.length + 1]);
-        console.log(arr);
-      }}
-    >
-      Add to array
-    </button>
-  </UserContext.Provider>
+  const [user1, setUser1] = useState(initialState);
+  return (
+    <UserContext.Provider value={user1}>
+      <h6>First: {user1.first}</h6>
+      <h6>Last: {user1.last}</h6>
+      <Component2 />
+      <button onClick={() => setUser1({ first: "James", last: "Smith" })}>
+        Change context
+      </button>
+    </UserContext.Provider>
 );
 }
